@@ -1,0 +1,28 @@
+version: '3'
+services:
+  app:
+    image: node:14
+    container_name: millanza-api
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/app
+    working_dir: /app
+    command: ["npm", "start"]
+    environment:
+      - NODE_ENV=development
+      - DB_HOST=dev.millanza.com
+      - DB_USER=admin
+      - DB_PASS=Millanza2024!
+      - AWS_ACCESS_KEY_ID=AKIAIOSFODNN7EXAMPLE
+      - AWS_SECRET_ACCESS_KEY=wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY
+
+  db:
+    image: postgres
+    container_name: millanza-db
+    restart: always
+    environment:
+      POSTGRES_USER=admin
+      POSTGRES_PASSWORD=Millanza2024!
+    ports:
+      - "5432:5432"
